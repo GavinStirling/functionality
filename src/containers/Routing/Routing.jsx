@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
-import Splash from "../Splash/Splash";
 import SignUp from "../SignUp/SignUp";
 import SignIn from "../SignIn/SignIn";
 import Home from "../Home/Home";
