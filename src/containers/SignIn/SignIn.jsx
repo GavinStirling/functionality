@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
+} from "firebase/auth";
 import InputField from "../../components/InputField/InputField";
 
 import "./SignIn.scss";
@@ -9,6 +14,7 @@ const defaultUser = { email: "", password: "" };
 
 const SignIn = () => {
     const auth = getAuth();
+    const provider = new GoogleAuthProvider();
     const navigate = useNavigate();
     const [user, setUser] = useState(defaultUser);
 
@@ -35,9 +41,35 @@ const SignIn = () => {
         }
     };
 
+    const handleGoogleSignIn = async () => {
+        try {
+            let userCredential = null;
+            signInWithPopup(auth, provider).then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            userCredential = GoogleAuthProvider.credentialFromResult(result);
+            const token = userCredential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            })
+
+            if (userCredential) {
+                sessionStorage.setItem(
+                    "display",
+                    userCredential.user.displayName
+                );
+                setUser(defaultUser);
+                navigate("/");
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
     return (
         <div>
-            SignIn
+            Sign In
+            <Link to="/sign-up">Create an Account</Link>
+            <button onClick={handleGoogleSignIn}>Sign in with Google</button>
             <form className="sign-in__inputs">
                 <InputField
                     value={user.email}
@@ -58,7 +90,7 @@ const SignIn = () => {
                     }
                 />
             </form>
-            <button onClick={handleSignIn}>Login</button>
+            <button type="submit" onClick={handleSignIn}>Login</button>
         </div>
     );
 };

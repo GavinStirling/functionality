@@ -7,6 +7,7 @@ import Splash from "../Splash/Splash";
 import SignUp from "../SignUp/SignUp";
 import SignIn from "../SignIn/SignIn";
 import Home from "../Home/Home";
+import Profile from "../Profile/Profile";
 
 const Routing = () => {
     const auth = getAuth();
@@ -28,16 +29,20 @@ const Routing = () => {
         return unsubscribe;
     }, []);
 
+    const handleUserLogout = () => {
+        setUserToken(null);
+        setUserLoading(true);
+      };
+
     return (
         <Router>
             <Routes>
                 <Route element={<ProtectedRoute user={!userToken} />}>
                     <Route
-                        path={userLoading ? "/" : "splash"}
-                        element={<Splash />}
+                        path={userLoading ? "/" : "sign-in"}
+                        element={<SignIn />}
                     />
-                    <Route path="/sign-in" element={<SignIn />} />
-                    <Route path="/create-account" element={<SignUp />} />
+                    <Route path="/sign-up" element={<SignUp />} />
                 </Route>
                 <Route
                     element={
@@ -52,6 +57,7 @@ const Routing = () => {
                             />
                         )}
                     </Route>
+                    <Route path="/profile" element={<Profile userProfile={userToken} handleUserLogout={handleUserLogout} />} />
                 </Route>
             </Routes>
         </Router>
