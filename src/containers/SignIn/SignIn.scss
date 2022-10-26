@@ -1,0 +1,15 @@
+.signin {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__form {
+        height: 50vh;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+}

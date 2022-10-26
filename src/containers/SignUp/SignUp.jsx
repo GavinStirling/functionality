@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+    getAuth,
+    updateProfile,
+    createUserWithEmailAndPassword,
+} from "firebase/auth";
 import InputField from "../../components/InputField/InputField";
 
 import "./SignUp.scss";
@@ -70,8 +74,8 @@ const SignUp = () => {
 
     return (
         <div className="signup">
-            Sign Up:
-            <form action="">
+            <h1>Sign Up</h1>
+            <form className="signup__form">
                 <InputField
                     inputType="text"
                     label="First Name"
@@ -112,8 +116,10 @@ const SignUp = () => {
                     inputName="confirmPassword"
                     value={user.confirmPassword}
                 />
+                <button linkto="/" onClick={handleSubmit} type="submit">
+                    Create Account
+                </button>
             </form>
-            <button linkTo="/" onClick={handleSubmit} type="submit">Create Account</button>
         </div>
     );
 };

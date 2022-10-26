@@ -1,21 +1,22 @@
 .input {
     width: 100%;
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;  
+    justify-content: space-evenly;  
   
     &__label {
       display: flex;
-      justify-content: flex-start;
-      align-self: flex-start;
+      justify-content: center;
+      align-self: center;
+      font-weight: 700;
     }
   
     &__input {
       border: none;
-      border-radius: 5px;
-      padding: 10px;
-      width: 100%;
+      border-radius: 0.5em;
+      padding: 1em;
+      margin: 1em;
+      width: 80%;
     }
   }
