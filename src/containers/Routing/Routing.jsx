@@ -26,7 +26,7 @@ const Routing = () => {
             }
         });
         return unsubscribe;
-    }, []);
+    }, [auth]);
 
     const handleUserLogout = () => {
         setUserToken(null);
